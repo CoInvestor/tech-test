@@ -34,10 +34,9 @@ The task is to create a single page that will return a list of the fund managers
 * Address
 * Website
 * Logo
-* Investment Phases
 * Sponsor Types
 
-Key requirements:
+#### Key requirements:
 
 Feel free to spend as much or as little time on the exercise as you like as long as the following conditions have been met.
 
