@@ -17,7 +17,10 @@ The task is to create a single page that will return a list of the fund managers
 
 Key requirements:
 Feel free to spend as much or as little time on the exercise as you like as long as the following conditions have been met.
-Please complete the user story below. Your code should compile and run in one step. Feel free to use whatever frameworks/libraries/packages you like.
+
+Please complete the user story below.
+
+Your code should compile and run in one step. Feel free to use whatever frameworks/libraries/packages you like.
 
 ## User Story
 As a `...`,
