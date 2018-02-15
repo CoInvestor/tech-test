@@ -3,9 +3,32 @@ Thank you for taking the time to do our technical test, it consists of a simple 
 Upon the completion of this test, we would like you to commit all your files and submit your results by creating a [Pull Request](https://github.com/CoInvestor/tech-test/pulls) and using your full name as the branch name with a summary explaining what you have done and why within the body of the pull request.
 
 ## Coding Test
-CoInvestor has a demo API available at https://api.coinvestor.co.uk/v2 which  you can use to get basic platform data.
-As an example, https://api.coinvestor.co.uk/v2/company/sponsor?include=details,primarySponsorType,otherSponsorTypes,marketingDetail,latestLogo&sort=-latestOpportunityLiveAt,name returns a list of fund managers that all have profiles on the platform. You can see an example of this on our [Live Site](https://www.coinvestor.co.uk/managers).
+CoInvestor runs off of a central API which is available at https://api.coinvestor.co.uk/v2. You can use the API get basic platform data. For example, https://api.coinvestor.co.uk/v2/company/sponsor returns a list of fund managers that all have profiles on the platform. 
 
+Additional data can be requested by includes using the [JSON:API](http://jsonapi.org/) spec.
+
+An example of possible includes on the above endpoint are;
+
+* latestLogo
+* marketingDetail
+* primarySponsorType
+* communications
+* investmentPhases
+* otherSponsorTypes
+
+You would then access them via calling a URL like
+
+Example
+
+`https://api.coinvestor.co.uk/v2/company/sponsor?include=communications,latestLogo`
+
+You could then sort these results by name using 
+
+`https://api.coinvestor.co.uk/v2/company/sponsor?include=communications,latestLogo&sort=name`
+
+You can see an example of this on our [Live Site](https://www.coinvestor.co.uk/managers).
+
+## Task
 The task is to create a single page that will return a list of the fund managers with their data in a structured and aesthetically pleasing design. The list of fund managers should then display at a minium the following:
 
 * Name
