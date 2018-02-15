@@ -22,6 +22,6 @@ Please complete the user story below. Your code should compile and run in one st
 ## User Story
 As a `...`,
 
-I can `...`
+I want `...`
 
 So that I `...`
