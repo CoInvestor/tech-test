@@ -40,7 +40,7 @@ The task is to create a single page that will return a list of the fund managers
 
 You have two weeks to complete this upon receiving the email link. Please ensure that you have met all of the above conditions
 
-Please complete the user story below.
+Please complete the user story below and place it in comments at the top of your code.
 
 Your code should compile and run in one step. Feel free to use whatever frameworks/libraries/packages you like.
 
