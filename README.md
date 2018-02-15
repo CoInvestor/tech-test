@@ -13,7 +13,6 @@ An example of possible includes on the above endpoint are;
 * marketingDetail
 * primarySponsorType
 * communications
-* investmentPhases
 * otherSponsorTypes
 
 You would then access them via calling a URL like
