@@ -38,7 +38,7 @@ The task is to create a single page that will return a list of the fund managers
 
 #### Key requirements:
 
-Feel free to spend as much or as little time on the exercise as you like as long as the following conditions have been met.
+You have two weeks to complete this upon receiving the email link. Please ensure that you have met all of the above conditions
 
 Please complete the user story below.
 
