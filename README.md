@@ -20,8 +20,8 @@ Feel free to spend as much or as little time on the exercise as you like as long
 Please complete the user story below. Your code should compile and run in one step. Feel free to use whatever frameworks/libraries/packages you like.
 
 ## User Story
-As a `**user running the application**`,
+As a `...`,
 
-I can `**view a list of CoInvestor fund managers**`
+I can `...`
 
-So that I `**know which fund managers CoInvestor has on their platform**`
+So that I `...`
