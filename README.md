@@ -24,7 +24,7 @@ Please complete the user story below.
 Your code should compile and run in one step. Feel free to use whatever frameworks/libraries/packages you like.
 
 ## User Story
-As a `...`,
+As a `...`
 
 I want `...`
 
