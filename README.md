@@ -21,5 +21,7 @@ Please complete the user story below. Your code should compile and run in one st
 
 ## User Story
 As a **user running the application**,
+
 I can **view a list of CoInvestor fund managers**
+
 So that I **know which fund managers CoInvestor has on their platform**
