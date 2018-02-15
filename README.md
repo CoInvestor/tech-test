@@ -1,6 +1,6 @@
 # CoInvestor - Engineer Recruitment Test
 Thank you for taking the time to do our technical test, it consists of a simple coding test.
-Upon the completion of this test, we would like you to commit all your files and submit your results by creating a [Pull Request](https://github.com/CoInvestor/test/pulls) and using your full name as the branch name with a summary explaining what you have done and why within the body of the pull request.
+Upon the completion of this test, we would like you to commit all your files and submit your results by creating a [Pull Request](https://github.com/CoInvestor/tech-test/pulls) and using your full name as the branch name with a summary explaining what you have done and why within the body of the pull request.
 
 ## Coding Test
 CoInvestor has a demo API available at https://api.coinvestor.co.uk/v2 which  you can use to get basic platform data.
