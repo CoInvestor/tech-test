@@ -45,8 +45,8 @@ Please complete the user story below.
 Your code should compile and run in one step. Feel free to use whatever frameworks/libraries/packages you like.
 
 ## User Story
-As a `...`
+As a user,
 
-I want `...`
+I want to be able to find the list of all the fund managers,
 
-So that I `...`
+So that I can see their name, address, website and sponsor type.
