@@ -1,0 +1,123 @@
+h1{
+    text-align: center;
+    color: #333;
+}
+p{
+    text-align: center;
+    color: black;
+}
+
+#mainNav {
+    border-bottom: 1px solid rgba(33, 37, 41, 0.1);
+    background-color: #fff;
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    transition: all 0.2s;
+  }
+  
+.navbar-brand.js-scroll-trigger{
+    color: #d60b52;
+}
+  header.masthead {
+    padding-top: 10rem;
+    padding-bottom: calc(10rem - 56px);
+    background-image: url("pexels-photo-139387.jpeg");
+    background-position: center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+
+  header.masthead hr {
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+
+  .manager {
+    width: 100%;
+    height: 190px;
+    margin: auto;
+    text-align: center;
+}
+
+.manager img {
+    width: 50%;
+    padding-top: 40px;
+
+}
+
+.name {
+    font-weight: bold;
+    height: 50px;
+    margin: 10px 0 0;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 14px;
+    text-align: center;
+}
+
+.spons {
+    text-align: center;
+    height: 40px;
+}
+
+.sponsor {
+    background-color: #fadee9;
+    font-size: 11px;
+    padding: 4px;
+    display: inline-block;
+    margin-left: 9px;
+    border-radius: 5px;
+}
+
+.sponsor:first-child {
+    margin-left: 0;
+}
+
+.description {
+   
+    font-size: 14px;
+    line-height: 1.5;
+    padding: 5px;
+    margin: 10px 0;
+    height: 100px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Playfair Display', serif;
+    padding: 0;
+    margin: 0;
+    color: #2D2D2D;
+    line-height: 1.4;
+    background-color: #FAFAFA;
+}
+
+.container {
+    width: 100%;
+    margin: auto;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.block {
+    width: 32%;
+    margin: 10px 0;
+    padding: 14px;
+    background-color: #fff;
+    border: 1px solid #dde5eb;
+}
+
+#mainNav{
+    font-family: 'Playfair Display', serif;
+    color: #2D2D2D;
+}
