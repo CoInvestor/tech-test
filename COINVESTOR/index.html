@@ -102,7 +102,7 @@
             return retImage;
         }
 
-        $.fn.informations = function (id) {
+        $.fn.information = function (id) {
             $.get("https://api.coinvestor.co.uk/v2/company/sponsor/" + id + "?include=latestLogo,communications,marketingDetail,primarySponsorType,otherSponsorTypes", function (data) {
                 $.each(data.included, function (index, value) {
                     if (value.type == "sponsor_type") {
