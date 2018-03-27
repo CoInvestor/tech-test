@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> CoInvestor Fund Manager Display </title>
+    <link rel="stylesheet" href="CoInvestorStyle.css">
+    <meta name="author" content="May Ottway">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script>
+    $(document).ready(function(){
+    var url = "https://api.coinvestor.co.uk/v2/company/sponsor?include=communications,latestLogo";
+      $.get(url,{op: "retrieve"},function(data,status){
+        console.log(status);
+        var tr;
+        var data = JSON.parse(data);
+        for (var i = 0; i < data.length; i++){
+          tr=$('<tr/>');
+          tr.append("<td>" + object.data[i].attributes.name + "</td>");
+          tr.append("<td>" + data[i]+ "</td>");
+          tr.append("<td>" + data[i] + "</td>");
+          tr.append("<td>" + data[i] + "</td>");
+        }
+      });
+    });
+    </script>
+  </head>
+  <body>
+    <h3> CoInvestor Fund Manager Display </h3>
+    <br>
+    <table id = "table">
+      <tr id = "head">
+        <th> Name </th>
+        <th> Address </th>
+        <th> Website </th>
+        <th> Logo </th>
+        <th> Sponser Types </th>
+      </tr>
+      <tr>
+      </tr>
+    </table>
+  </body>
+</html>
