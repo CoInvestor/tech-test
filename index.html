@@ -8,17 +8,18 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script>
     $(document).ready(function(){
-    var url = "https://api.coinvestor.co.uk/v2/company/sponsor?include=communications,latestLogo";
+    var url = "https://api.coinvestor.co.uk/v2/company/sponsor?include=latestLogo&sort=name";
       $.get(url,{op: "retrieve"},function(data,status){
-        console.log(status);
         var tr;
-        var data = JSON.parse(data);
-        for (var i = 0; i < data.length; i++){
+        console.log(status);
+        for (var i = 0; i < data["data"].length; i++){
           tr=$('<tr/>');
-          tr.append("<td>" + object.data[i].attributes.name + "</td>");
-          tr.append("<td>" + data[i]+ "</td>");
-          tr.append("<td>" + data[i] + "</td>");
-          tr.append("<td>" + data[i] + "</td>");
+          var id = data["data"][i].id;
+          tr.append("<td>" + data["data"][i].attributes.name + "</td>");
+          tr.append("<td> dank memes </td>")
+          tr.append("<td>" + data["included"][i].attributes.website + "</td>");
+          tr.append("<td> <img src=" + data["included"][i].attributes.path + " alt="+ data["data"][i].attributes.name +" height='300' width ='300' </td>");
+          $('table').append(tr);
         }
       });
     });

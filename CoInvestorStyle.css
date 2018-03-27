@@ -15,8 +15,12 @@ body {
     color: #454545;
 }
 
+img {
+    object-fit: contain;
+}
 
 table, th, td {
+    margin: 0px auto;
     border: 1px solid black;
     border-collapse: collapse;
     table-layout: auto;
