@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>CoInvestor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $.fn.populate();
+        });
+        $individuals = [];
+        $.fn.populate = function() {
+            //Get pages
+            $.getJSON("https://api.coinvestor.co.uk/v2/company/sponsor?sort=name",function(data) {
+                var $numbOfPages = data.meta.pagination.total_pages;
+                var $totalIndividuals = data.meta.pagination.total;
+                //Get page urls
+                for(var $i = 1; $i <= $numbOfPages;$i ++) {
+                    $.fn.getPageData("https://api.coinvestor.co.uk/v2/company/sponsor?sort=name&page="+$i);
+                    
+                }
+                setTimeout(function() {alert($individuals.length)},500);
+            });
+            //Get data for each page
+            //Get individual data
+            //Load data for individual users
+        }
+        $.fn.getPageData = function($url) {
+            $.getJSON($url,function($data) {
+                $.each($data.data,function(index,value) {
+                    //alert(value.attributes.name);
+                    $indiObj = $.fn.getIndividualData(value.id);
+                })
+            });
+        }
+        $.fn.getIndividualData = function($id) {
+            //alert($id);
+            var $object;
+            $.getJSON("https://api.coinvestor.co.uk/v2/company/sponsor/" + $id + "?include=latestLogo,marketingDetail,primarySponsorType,communications,otherSponsorTypes", function($data) {
+                $object = {
+                    name : $data.data.attributes.name,
+                    sponsorTypes : [],
+                    logoUrl : "",
+                    email : "",
+                    websiteUrl : ""
+                }
+                $.each($data.included,function($index,$value) {
+                    if($value.type == "sponsor_type") {
+                        $object.sponsorTypes.push($value.attributes.value);
+                    } else if($value.type == "file_manager") {
+                        $object.logoUrl = $value.attributes.path;
+                    } else if($value.type == "company_communication") {
+                        $object.email = $value.attributes.email;
+                        $object.websiteUrl = $value.attributes.website;
+                    }
+                });
+                $individuals.push($object);
+                $.fn.addIndividual($object);
+            })
+        }
+        $.fn.addIndividual = function($data) {
+            var $panel = $("<div class='panel'></div>");
+            var $panelHeader = $("<div class='panelHeading'></div>");
+            $("<h4 class='name'>" + $data.name + "</h4>").appendTo($panelHeader);
+            $panelHeader.appendTo($panel);
+            var $panelBody = $("<div class='panelBody'></div>");
+            if($data.logoUrl != ""){
+                var $logoContainer = $("<div class='logoContainer'></div>");
+                $("<img class='logo' src='" + $data.logoUrl + "'/>").appendTo($logoContainer);
+                $logoContainer.appendTo($panelBody);
+            }
+            var $sponsorContainer = $("<div class='sponsorContainer'></div>");
+            $.each($data.sponsorTypes,function(index,value) {
+                $("<div class='sponsor'>" + value + "</div>").appendTo($sponsorContainer);
+            })
+            $sponsorContainer.appendTo($panelBody);
+            var $linkContainer = $("<div class='linkContainer'></div>");
+            $("<a class='link' href='" + $data.websiteUrl + "'>Website</a>").appendTo($linkContainer);
+            $("<a class='link' href='mailto:" + $data.email + "'>Email</a>").appendTo($linkContainer);
+            $linkContainer.appendTo($panelBody);
+            $panelBody.appendTo($panel);
+            $("#content").append($panel);
+        }
+    </script>
+    <style>
+        .panel {
+            width: 240px;
+            background-color: lightblue;
+            display: inline-block;
+            vertical-align: top;
+            min-height: 500px;
+            border-radius: 20px;
+            /*padding: 20px;*/
+            margin: 10px;
+        }
+        .panelHeading {
+            min-height: 50px;
+            background-color: cornflowerblue;
+            padding: 20px;
+            border-top-right-radius: 20px;
+            border-top-left-radius: 20px;
+        }
+        .panelBody {
+            padding: 20px;
+        }
+        .name {
+            vertical-align: middle;
+            text-align: center;
+            margin: 0 auto;
+        }
+        .logoContainer {
+            height: 150px;
+            line-height: 150px;
+            position: relative;
+            vertical-align: middle;
+            text-align: center;
+        }
+        .logo {
+            vertical-align: middle;
+            max-width: 100%;
+            max-height: 100%;
+            margin: 0 auto;
+            
+            /*line-height: 200px;*/
+        }
+        .sponsorContainer {
+            text-align: center;
+        }
+        .sponsor {
+            display: inline-block;
+            background-color: aqua;
+            padding: 5px;
+            margin: 10px;
+            border-radius: 5px;
+        }
+        .linkContainer {
+            text-align: center;
+            height: 40px;
+        }
+        .link {
+            border-radius: 10px;
+            background-color: lightskyblue;
+            border : 1px solid lightsteelblue;
+            margin: 10px;
+            padding: 10px;
+            display: inline-block;
+            color: black;
+            text-decoration: none;
+
+            
+        }
+        .link:hover {
+            background-color: lightslategrey;
+        }
+        #content {
+            margin: 0 auto;
+            width: 1040px;
+        }
+        body {
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <div id="header"></div>
+    <div id="content"></div>
+</body>
+</html>
