@@ -14,15 +14,14 @@
         $individuals = [];
         $.fn.populate = function() {
             //Get pages
-            $.getJSON("https://api.coinvestor.co.uk/v2/company/sponsor?sort=name",function(data) {
-                var $numbOfPages = data.meta.pagination.total_pages;
-                var $totalIndividuals = data.meta.pagination.total;
+            $.getJSON("https://api.coinvestor.co.uk/v2/company/sponsor?sort=name",function($data) {
+                var $numbOfPages = $data.meta.pagination.total_pages;
+                var $totalIndividuals = $data.meta.pagination.total;
                 //Get page urls
                 for(var $i = 1; $i <= $numbOfPages;$i ++) {
                     $.fn.getPageData("https://api.coinvestor.co.uk/v2/company/sponsor?sort=name&page="+$i);
                     
                 }
-                setTimeout(function() {alert($individuals.length)},500);
             });
             //Get data for each page
             //Get individual data
@@ -30,9 +29,9 @@
         }
         $.fn.getPageData = function($url) {
             $.getJSON($url,function($data) {
-                $.each($data.data,function(index,value) {
+                $.each($data.data,function($index,$value) {
                     //alert(value.attributes.name);
-                    $indiObj = $.fn.getIndividualData(value.id);
+                    $indiObj = $.fn.getIndividualData($value.id);
                 })
             });
         }
@@ -59,6 +58,7 @@
                 });
                 $individuals.push($object);
                 $.fn.addIndividual($object);
+                $.fn.sortUsers();
             })
         }
         $.fn.addIndividual = function($data) {
@@ -83,6 +83,17 @@
             $linkContainer.appendTo($panelBody);
             $panelBody.appendTo($panel);
             $("#content").append($panel);
+        }
+        $.fn.sortUsers = function() {
+            $individuals.sort(function($a, $b){
+                if($a.name < $b.name) return -1;
+                if($a.name > $b.name) return 1;
+                return 0;
+            })
+            $("#content").empty();
+            for(var $i = 0; $i < $individuals.length; $i++) {
+                $.fn.addIndividual($individuals[$i]);
+            }
         }
     </script>
     <style>
