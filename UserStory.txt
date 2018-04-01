@@ -1,0 +1,5 @@
+As a user
+
+I want to be able to see all the relevant info for each company
+
+So that I can quickly access the needed information without having to search databases

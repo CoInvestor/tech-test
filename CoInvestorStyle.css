@@ -1,0 +1,33 @@
+
+@font-face{
+  font-family: 'OpenSans';
+  src: url('https://fonts.googleapis.com/css?family=Open+Sans');
+}
+
+body {
+    text-align: center;
+    background-color:#ffffff;
+    line-height: 1em;
+    padding-top: 0;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    color: #454545;
+}
+
+img {
+    object-fit: contain;
+}
+
+table, th, td {
+    margin: 0px auto;
+    border: 1px solid black;
+    border-collapse: collapse;
+    table-layout: auto;
+    padding: 15px;
+
+}
+
+.head{
+  font-size: 16px;
+}
