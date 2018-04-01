@@ -25,8 +25,9 @@ table, th, td {
     border-collapse: collapse;
     table-layout: auto;
     padding: 15px;
+
 }
 
-#head{
+.head{
   font-size: 16px;
 }
