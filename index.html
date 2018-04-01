@@ -8,15 +8,15 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script>
     $(document).ready(function(){
-        getData(1);
+        getData(1); //Sends intial page to the form
         $.get('https://api.coinvestor.co.uk/v2/company/sponsor?op=pages',function(data,status){
-				for (var i = 1; i < data["meta"].pagination.total_pages+1; i++){
-				  $("#buttons").append('<button onclick="updatePage('+i+')">'+i+'</button>');
+				for (var i = 1; i < data["meta"].pagination.total_pages+1; i++){ //Get total page number
+				  $("#buttons").append('<button onclick="updatePage('+i+')">'+i+'</button>'); //And make that many buttons
 				}
 			});
     });
     function updatePage(i){
-      $("tr").not(".head").remove();
+      $("tr").not(".head").remove(); //Clears out old data from the form when page updates
       getData(i);
     }
 
@@ -24,34 +24,37 @@
       var url = "https://api.coinvestor.co.uk/v2/company/sponsor?include=communications,latestLogo,primarySponsorType&sort=name";
         $.get(url,{op: "retrieve",page: i},function(data,status){
           var tr;
-          var limit = data["meta"].pagination.count;
+          var limit = data["meta"].pagination.count; //Gets the limit to avoid an error with it constantly trying to get the IDs
           for (var i = 0; i < data["data"].length; i++){
             if(i != limit){
-              var communicationID = data["data"][i].relationships.communications.data[0].id;
+              var communicationID = data["data"][i].relationships.communications.data[0].id; //Get all the relationship IDs for I
               var logoID = data["data"][i].relationships.latestLogo.data.id;
               var sponsorTypeID = data["data"][i].relationships.primarySponsorType.data.id;
             }
             tr=$('<tr/>');
             tr.append("<td>" + data["data"][i].attributes.name + "</td>");
-            tr.append("<td> Address Placeholder</td>")
-
-            for(var j=0; j < data["included"].length; j++){
-              if(data["included"][j].id == communicationID && data["included"][j].type == "company_communication"){
-                if(data["included"][j].attributes.website == "http://"){
+            for(var j=0; j < data["included"].length; j++){ //Manages the relationship between data and communication
+              if(data["included"][j].id == communicationID && data["included"][j].type == "company_communication"){ //Is it the correct ID and the correct type?
+                if(data["included"][j].attributes.email == ""){  //If data is Null
+                  tr.append("<td>No Email Given</td>");
+                } else {
+                  tr.append("<td>"+data["included"][j].attributes.email+"</td>"); //Else get the email
+                }
+                if(data["included"][j].attributes.website == "http://"){ //Same with website address
                   tr.append("<td> Undisclosed </td>");
                 } else {
                   tr.append("<td>" + data["included"][j].attributes.website + "</td>");
                 }
               }
             }
-            for(var j=0; j < data["included"].length; j++){
+            for(var j=0; j < data["included"].length; j++){ //Same as above
               if(data["included"][j].id == logoID && data["included"][j].type == "file_manager"){
-                tr.append("<td> <img src=" + data["included"][j].attributes.path + " alt="+ data["data"][i].attributes.name +" height='300' width ='300' </td>");
+                tr.append("<td> <img src=" + data["included"][j].attributes.path + " alt="+ data["data"][i].attributes.name +" height='300' width ='300' </td>"); //Only difference is alt text adding as well as the force height attributes
               }
             }
             for(var j=0; j < data["included"].length; j++){
               if(data["included"][j].id == sponsorTypeID && data["included"][j].type == "sponsor_type"){
-                tr.append("<td>"+ data["included"][j].attributes.value + "</td>");
+                tr.append("<td>"+ data["included"][j].attributes.value + "</td>"); 
               }
             }
             $('table').append(tr);
