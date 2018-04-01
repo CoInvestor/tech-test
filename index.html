@@ -8,17 +8,35 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script>
     $(document).ready(function(){
-    var url = "https://api.coinvestor.co.uk/v2/company/sponsor?include=latestLogo&sort=name";
+    var url = "https://api.coinvestor.co.uk/v2/company/sponsor?include=communications,latestLogo,primarySponsorType&sort=name";
       $.get(url,{op: "retrieve"},function(data,status){
         var tr;
-        console.log(status);
+        var limit = data["meta"].pagination.count;
         for (var i = 0; i < data["data"].length; i++){
+          if(i != limit){
+            var communicationID = data["data"][i].relationships.communications.data[0].id;
+            var logoID = data["data"][i].relationships.latestLogo.data.id;
+            var sponsorTypeID = data["data"][i].relationships.primarySponsorType.data.id;
+          }
           tr=$('<tr/>');
-          var id = data["data"][i].id;
           tr.append("<td>" + data["data"][i].attributes.name + "</td>");
-          tr.append("<td> dank memes </td>")
-          tr.append("<td>" + data["included"][i].attributes.website + "</td>");
-          tr.append("<td> <img src=" + data["included"][i].attributes.path + " alt="+ data["data"][i].attributes.name +" height='300' width ='300' </td>");
+          tr.append("<td> Address Placeholder</td>")
+
+          for(var j=0; j < data["included"].length; j++){
+            if(data["included"][j].id == communicationID && data["included"][j].type == "company_communication"){
+              tr.append("<td>" + data["included"][j].attributes.website + "</td>");
+            }
+          }
+          for(var j=0; j < data["included"].length; j++){
+            if(data["included"][j].id == logoID && data["included"][j].type == "file_manager"){
+              tr.append("<td> <img src=" + data["included"][j].attributes.path + " alt="+ data["data"][i].attributes.name +" height='300' width ='300' </td>");
+            }
+          }
+          for(var j=0; j < data["included"].length; j++){
+            if(data["included"][j].id == sponsorTypeID && data["included"][j].type == "sponsor_type"){
+              tr.append("<td>"+ data["included"][j].attributes.value + "</td>");
+            }
+          }
           $('table').append(tr);
         }
       });
