@@ -91,8 +91,6 @@
                 $.fn.informations(value.id);
             });
         }, "json");
-
-
         $.fn.getImage = function (id) {
             var retImage = "";
             $.get("https://api.coinvestor.co.uk/v2/company/sponsor/" + id + "?include=latestLogo", function (data) {
@@ -101,7 +99,6 @@
             }, "json");
             return retImage;
         }
-
         $.fn.informations = function (id) {
             $.get("https://api.coinvestor.co.uk/v2/company/sponsor/" + id + "?include=latestLogo,communications,marketingDetail,primarySponsorType,otherSponsorTypes", function (data) {
                 $.each(data.included, function (index, value) {
@@ -113,14 +110,9 @@
                     } else if (value.type == "company_communication") {
                         $("#website" + id).append("<a class='btn' href='" + value.attributes.website + "'>More info</a>");
                     }
-
-
                 });
-
             }, "json");
         }
     });
-
 </script>
-
 </html>
