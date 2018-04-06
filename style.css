@@ -1,0 +1,118 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+  background-color: #454545;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+#title {
+  text-align: center;
+  font-size: 20px;
+  color: #f2f2f2;
+  padding: 10px;
+}
+
+img#logo {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+
+  width: auto;
+  height: auto;
+  max-width: 250px;
+  max-height: 100px;
+}
+
+#errorOutput {
+  text-align: center;
+  font-size: 30px;
+  color: #f2f2f2;
+  padding: 10px;
+}
+
+#outputTable {
+  font-size: 15px;
+  border-collapse: collapse;
+  width: 75%;
+  align: center;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 70px;
+}
+
+#outputTable td, #outputTable th {
+  padding: 8px;
+}
+
+#outputTable td {
+  border: 1px solid #efefef;
+}
+
+#outputTable tr {
+  font-size: 12px;
+  background-color: #fcfcfc;
+}
+
+#outputTable tr:hover {
+  background-color: #dddddd;
+}
+
+#outputTable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  cursor: default;
+  text-align: left;
+  background-color: #d60b52;
+  text-align: center;
+  color: #f2f2f2;
+}
+
+#outputTable img {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+
+  width: auto;
+  height: auto;
+  max-width: 250px;
+  max-height: 100px;
+}
+
+ul#paginator{
+  position: fixed;
+  width: 100%;
+  height: 50px;
+  bottom: 0;
+  margin-bottom: 0;
+  padding: 0;
+  text-align: center;
+  background-color: #d60b52;
+}
+
+ul#paginator li {
+  text-align: center;
+  display: inline-block;
+}
+
+ul#paginator input,ul#paginator li #currPage{
+  font-family: inherit;
+  font-size: inherit;
+  display: inline-block;
+  width: 100px;
+  height: 50px;
+  color: #f2f2f2;
+  background-color: #d60b52;
+  border: none;
+}
+
+ul#paginator input{
+  cursor: pointer;
+}
+
+ul#paginator li #currPage{
+  cursor: default;
+}
+
+ul#paginator li input:hover {
+    background-color: #c10b4a;
+}
