@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CoInvestor Database</title>
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+	<style type="text/css">
+		body {
+		  color: black;
+		  background-color:SlateBlue;
+		}
+
+		h1{
+		  color:black;
+		  background-color:white ;
+		  text-align:center;
+			font-family: verdana;
+			border:2px solid Black;
+		}
+		table,td{
+     color:black;
+		 background-color: white;
+		 padding: 15px;
+		 text-align:center;
+		 border: 2px solid black;
+
+		}
+		td:hover{
+			color:SlateBlue;
+		}
+
+	th{
+		background-color:SlateBlue;
+	}
+	img{
+		display: block;
+	 margin-left: auto;
+	 margin-right: auto;
+	 width: 40%;
+	}
+	</style>
+</head>
+<body>
+	<h1>CoInvestor Fund Managers</h1>
+	<img src = "Coinvestor-logo.jpg" alt="co-logo" width ="300" height ="200">
+		<br/>
+	<table id="table">
+		<tr>
+			<th>Name</th>
+			<th>Address</th>
+			<th>Website</th>
+			<th>Logo</th>
+			<th>Primary Sponsor Types</th>
+			<th>Other Sponsor Types</th>
+		</tr>
+	</table>
+</body>
+<script type="text/javascript">
+	console.log("Started!");
+	var Data;
+	// GET THE JSON DATA FROM THE API
+	$.getJSON('https://api.coinvestor.co.uk/v2/company/sponsor', function(data)
+	{
+		$.each(data['data'], function(key, s)
+		{
+			//console.log(s['links'].self);
+			//Get the indiviual companies data
+			$.getJSON(s['links'].self+'?include=communications,latestLogo,marketingDetail,primarySponsorType,otherSponsorTypes', function(innerData)
+			{
+				//SORT THROUGH THE DATA AND APPEND TO THE TABLE
+			    // $.each(innerData, function(innerKey, S)
+			    // {
+				//console.log(innerData);
+				var tr = "<tr>";
+
+				// Add Name
+				tr += "<td>"+innerData['data']['attributes'].name+"</td>"
+
+				// Add email address, website
+				for (var i = innerData['included'].length - 1; i >= 0; i--)
+				{
+					if (innerData['included'][i].type == "company_communication")
+					{
+						//email
+						tr += "<td><a href=\"mailto:"+innerData['included'][i]['attributes'].email+"\">"+innerData['included'][i]['attributes'].email+"</a></td>"
+						//website
+						tr += "<td><a href=\""+innerData['included'][i]['attributes'].website+"\">"+innerData['included'][i]['attributes'].website+"</td>"
+					}
+				}
+
+				// Add Logo
+				for (var i = innerData['included'].length - 1; i >= 0; i--)
+				{
+					if (innerData['included'][i].type == "file_manager")
+					{
+						//logo
+						tr += "<td><img width=\"50\" src=\""+innerData['included'][i]['attributes'].path+"\"></img></td>"
+					}
+				}
+
+				// Add Primary sponsor value
+				for (var i = innerData['included'].length - 1; i >= 0; i--)
+				{
+					if (innerData['included'][i].type == "sponsor_type")
+					{
+						if(innerData['included'][i].id == innerData['data']['relationships']['primarySponsorType']['data'].id)
+						{
+							//sponsor type
+							tr += "<td>"+innerData['included'][i]['attributes'].value+"</td>"
+						}
+
+					}
+				}
+
+				// Other Sponsors
+				var otherSponsors = "";
+				for (var i = innerData['included'].length - 1; i >= 0; i--)
+				{
+					if (innerData['included'][i].type == "sponsor_type")
+					{
+						if(innerData['included'][i].id != innerData['data']['relationships']['primarySponsorType']['data'].id)
+						{
+							//sponsor type
+							if (innerData['included'][i]['attributes'].value != "undefined")
+								otherSponsors += innerData['included'][i]['attributes'].value+", ";
+						}
+
+					}
+				}
+				tr += "<td>"+otherSponsors.slice(0, -2)+"</td>"+
+				"</tr>"
+				$(tr).appendTo("#table");
+		   	});
+	   	});
+	});
+	console.log("Finished");
+</script>
+</html>
+
+
+<!-- https://api.coinvestor.co.uk/v2/company/sponsor/1?include=marketingDetail, primarySponsorType, communications, otherSponsorTypes -->
+
+<!-- latestLogo
+marketingDetail
+primarySponsorType
+communications
+otherSponsorTypes
+You would then access them via calling a URL like
+
+Example
+
+https://api.coinvestor.co.uk/v2/company/sponsor?include=communications -->
+
+
+
+<!-- <body>
+<h1> CoInvestor Fund Managers</h1>
+
+<br>
+
+<table id="table">
+<tr>
+<th>Name</th>
+<th>Address</th>
+<th>Website</th>
+<th>Logo</th>
+<th>Primary Sponsor Types</th>
+<th>Other Sponsor Types</th>
+</tr>
+</table>
+
+<br>
+<br> -->
